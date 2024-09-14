@@ -62,7 +62,6 @@ class FlaskTestCase(unittest.TestCase):
             'BsmtFinSF2': 0,
             'TotalBsmtSF': 856,
         }
-        
         preprocessed_data = preprocess_input(input_data)
         prediction = model.predict(preprocessed_data)[0]
 

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Sarib's Prediction</title>
+</head>
+<body>
+    <header>
+        <h1>Sarib's Prediction</h1>
+    </header>
+    
+    <form action="/" method="POST">
+        <div>
+            <label for="MSSubClass">MSSubClass:</label>
+            <input type="number" id="MSSubClass" name="MSSubClass" required>
+        </div>
+
+        <div>
+            <label for="MSZoning">MSZoning:</label>
+            <input type="text" id="MSZoning" name="MSZoning" required>
+        </div>
+
+        <div>
+            <label for="LotArea">LotArea:</label>
+            <input type="number" id="LotArea" name="LotArea" required>
+        </div>
+
+        <div>
+            <label for="LotConfig">LotConfig:</label>
+            <input type="text" id="LotConfig" name="LotConfig" required>
+        </div>
+
+        <div>
+            <label for="BldgType">BldgType:</label>
+            <input type="text" id="BldgType" name="BldgType" required>
+        </div>
+
+        <div>
+            <label for="OverallCond">OverallCond:</label>
+            <input type="number" id="OverallCond" name="OverallCond" required>
+        </div>
+
+        <div>
+            <label for="YearBuilt">YearBuilt:</label>
+            <input type="number" id="YearBuilt" name="YearBuilt" required>
+        </div>
+
+        <div>
+            <label for="YearRemodAdd">YearRemodAdd:</label>
+            <input type="number" id="YearRemodAdd" name="YearRemodAdd" required>
+        </div>
+
+        <div>
+            <label for="Exterior1st">Exterior1st:</label>
+            <input type="text" id="Exterior1st" name="Exterior1st" required>
+        </div>
+
+        <div>
+            <label for="BsmtFinSF2">BsmtFinSF2:</label>
+            <input type="number" id="BsmtFinSF2" name="BsmtFinSF2" required>
+        </div>
+
+        <div>
+            <label for="TotalBsmtSF">TotalBsmtSF:</label>
+            <input type="number" id="TotalBsmtSF" name="TotalBsmtSF" required>
+        </div>
+
+        <button type="submit">Predict Price</button>
+    </form>
+
+    {% if price %}
+    <div class="result">
+        <h2>Predicted Sale Price: ${{ price }}</h2>
+    </div>
+    {% endif %}
+    
+    <footer>
+        <a href="#">Home</a>
+        <a href="#">Contact Us</a>
+    </footer>
+</body>
+</html>

@@ -1,17 +1,22 @@
 import unittest
-import json
 from app import app, model, preprocess_input  # Ensure you import your app and model
 
 class FlaskTestCase(unittest.TestCase):
-    # Test if Flask app is running correctly
+    """Test case for the Flask application."""
+
+    def setUp(self):
+        """Set up the Flask test client."""
+        self.app = app
+        self.client = self.app.test_client()
+        self.app.testing = True
+
     def test_homepage(self):
-        tester = app.test_client(self)
-        response = tester.get('/')
+        """Test if the homepage is running correctly."""
+        response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
 
-    # Test API for price prediction
     def test_prediction(self):
-        tester = app.test_client(self)
+        """Test the prediction API."""
         # Provide sample input data
         input_data = {
             'MSSubClass': 60,
@@ -28,17 +33,15 @@ class FlaskTestCase(unittest.TestCase):
         }
 
         # Send POST request to the Flask app
-        response = tester.post('/', data=input_data)
+        response = self.client.post('/', data=input_data)
 
         # Check if response is successful
         self.assertEqual(response.status_code, 200)
         # Check if the prediction output exists
-        # self.assertIn(b'price', response.data)
         self.assertIn(b'Predicted Sale Price', response.data)
 
-
-    # Unit test for the model
     def test_model_prediction(self):
+        """Unit test for model prediction."""
         # Sample preprocessed data (you'll have to adjust based on your model requirements)
         input_data = {
             'MSSubClass': 60,

@@ -122,17 +122,11 @@ jobs:
             echo "Running in development environment"
             python -m pytest test.py
           elif [ "${{ matrix.environment }}" = "staging" ]; then
-            echo "Running in staging environment"
-            # Add specific commands for staging here
-            python -m pytest test.py
             echo "Deploying to staging environment"
-            # Example deploy command for Vercel:
-            vercel --prod --scope=staging
-          elif [ "${{ matrix.environment }}" = "production" ]; then
-            echo "Running in production environment"
-            # Add specific commands for production here
             python -m pytest test.py
+            vercel --prod --scope=staging --token ${{ secrets.VERCEL_TOKEN }}
+          elif [ "${{ matrix.environment }}" = "production" ]; then
             echo "Deploying to production environment"
-            # Example deploy command for Vercel:
-            vercel --prod --scope=production
+            python -m pytest test.py
+            vercel --prod --scope=production --token ${{ secrets.VERCEL_TOKEN }}
           fi

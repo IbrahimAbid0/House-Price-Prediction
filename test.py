@@ -1,3 +1,9 @@
+"""
+This module contains unit tests for the Flask application.
+It tests the functionality of the homepage, the prediction API,
+and the model prediction.
+"""
+
 import unittest
 from app import app, model, preprocess_input  # Ensure you import your app and model
 

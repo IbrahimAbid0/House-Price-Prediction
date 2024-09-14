@@ -1,9 +1,12 @@
-name: CI Pipeline
+name: CI/CD Pipeline
 
 on:
   push:
     branches:
       - main
+      - development
+      - staging
+      - production
   pull_request:
     branches:
       - main
@@ -90,3 +93,32 @@ jobs:
         run: |
           echo "Building and testing for ${{ matrix.environment }} environment"
           # Add your build and test commands here
+
+  deploy:
+    name: Deploy to Vercel
+    runs-on: ubuntu-latest
+    needs: build
+    strategy:
+      matrix:
+        environment: [development, staging, production]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.12'
+
+      - name: Deploy to ${{ matrix.environment }} environment
+        run: |
+          if [[ "${{ matrix.environment }}" == "development" ]]; then
+            echo "Deploying to development"
+            vercel --token ${{ secrets.VERCEL_TOKEN }} --prod --scope <your-vercel-scope>
+          elif [[ "${{ matrix.environment }}" == "staging" ]]; then
+            echo "Deploying to staging"
+            vercel --token ${{ secrets.VERCEL_TOKEN }} --prod --scope <your-vercel-scope> --confirm --target staging
+          else
+            echo "Deploying to production"
+            vercel --token ${{ secrets.VERCEL_TOKEN }} --prod --scope <your-vercel-scope> --confirm
+          fi

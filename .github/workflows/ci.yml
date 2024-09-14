@@ -119,18 +119,18 @@ jobs:
         run: |
           if [ "${{ matrix.environment }}" = "development" ]; then
             echo "Running in development environment"
-            pytest test.py
+            python -m pytest test.py
           elif [ "${{ matrix.environment }}" = "staging" ]; then
             echo "Running in staging environment"
             # Add specific commands for staging here
-            pytest test.py
+            python -m pytest test.py
             echo "Deploying to staging environment"
             # Example deploy command for Vercel:
             vercel --prod --scope=staging
           elif [ "${{ matrix.environment }}" = "production" ]; then
             echo "Running in production environment"
             # Add specific commands for production here
-            pytest test.py
+            python -m pytest test.py
             echo "Deploying to production environment"
             # Example deploy command for Vercel:
             vercel --prod --scope=production

@@ -5,7 +5,7 @@ and the model prediction.
 """
 
 import unittest
-from app import app, model, preprocess_input
+from Feature-Frontend.app import app, model, preprocess_input
 
 
 class FlaskTestCase(unittest.TestCase):

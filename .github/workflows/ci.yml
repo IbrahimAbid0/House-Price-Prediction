@@ -110,6 +110,11 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Install dependencies  # This ensures pytest is available
+        run: |
+          pip install -r requirements.txt
+          pip install pytest
+
       - name: Build and test for ${{ matrix.environment }}
         run: |
           if [ "${{ matrix.environment }}" = "development" ]; then

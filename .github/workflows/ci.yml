@@ -62,6 +62,12 @@ jobs:
           pip install -r requirements.txt
           pip install pytest
 
+      - name: Fetch all branches
+        run: git fetch --all
+
+      - name: Checkout the `Feature-Frontend` branch to get `app.py`
+        run: git checkout feature-frontend -- app.py
+
       - name: Run tests
         run: |
           pytest test.py

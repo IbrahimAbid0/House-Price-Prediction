@@ -26,10 +26,23 @@ jobs:
           pip install -r requirements.txt
           pip install pylint flake8
 
-      - name: Run linting
-        run: |
-          pylint app.py test.py
-          flake8 app.py test.py
+      - name: Fetch all branches
+        run: git fetch --all
+    
+      - name: Checkout main branch
+        run: git checkout main
+    
+      - name: Extract app.py from Feature-Frontend
+        run: git show origin/Feature-Frontend:app.py > /tmp/app.py
+    
+      - name: Run pylint
+        run: pylint /tmp/app.py test.py
+    
+      - name: Run flake8
+        run: flake8 /tmp/app.py test.py
+    
+      - name: Clean up
+        run: rm /tmp/app.py
 
   test:
     name: Run Unit Tests

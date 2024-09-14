@@ -5,7 +5,8 @@ and the model prediction.
 """
 
 import unittest
-from app import app, model, preprocess_input  # Ensure you import your app and model
+from app import app, model, preprocess_input
+
 
 class FlaskTestCase(unittest.TestCase):
     """Test case for the Flask application."""
@@ -48,7 +49,6 @@ class FlaskTestCase(unittest.TestCase):
 
     def test_model_prediction(self):
         """Unit test for model prediction."""
-        # Sample preprocessed data (you'll have to adjust based on your model requirements)
         input_data = {
             'MSSubClass': 60,
             'MSZoning': 'RL',
@@ -68,6 +68,7 @@ class FlaskTestCase(unittest.TestCase):
         # Check if the prediction is a float and within a reasonable range
         self.assertIsInstance(prediction, float)
         self.assertGreater(prediction, 0)  # Ensure the price is greater than 0
+
 
 if __name__ == '__main__':
     unittest.main()

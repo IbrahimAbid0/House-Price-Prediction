@@ -11,6 +11,7 @@ encoder = joblib.load('onehot_encoder.pkl')  # OneHotEncoder from your notebook
 
 # Preprocessing function to transform input
 def preprocess_input(data):
+    """Preprocess the input data for prediction."""
     df = pd.DataFrame([data])
 
     # List of categorical columns used in your notebook
@@ -29,6 +30,7 @@ def preprocess_input(data):
 # Flask route to handle prediction
 @app.route("/", methods=["GET", "POST"])
 def index():
+    """Handle the prediction request and render the result."""
     price = None
     if request.method == "POST":
         # Collect input data from form

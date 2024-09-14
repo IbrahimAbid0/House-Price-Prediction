@@ -28,8 +28,20 @@ jobs:
 
       - name: Run linting
         run: |
-          pylint app.py test.py
-          flake8 app.py test.py
+          git fetch origin Feature-Frontend
+          git checkout Feature-Frontend
+
+          # Extract the file from the branch and save it to a temporary file
+          git show Feature-Frontend:app.py > /tmp/app.py
+          
+          # Run pylint on the extracted file and test.py
+          pylint /tmp/app.py test.py
+          
+          # Run flake8 on the extracted file and test.py
+          flake8 /tmp/app.py test.py
+          
+          rm /tmp/app.py
+
 
   test:
     name: Run Unit Tests

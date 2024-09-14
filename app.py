@@ -1,3 +1,9 @@
+"""
+This module defines a Flask application for predicting house prices
+using a pre-trained model and encoder. It provides an endpoint to
+collect input data, preprocess it, and return the predicted price.
+"""
+
 from flask import Flask, render_template, request
 import joblib  # To load your trained model and encoder
 import pandas as pd

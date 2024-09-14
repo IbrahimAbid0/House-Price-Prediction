@@ -22,7 +22,6 @@ def preprocess_input(data):
 
     # List of categorical columns used in your notebook
     categorical_cols = ['MSZoning', 'LotConfig', 'BldgType', 'Exterior1st']
-    
     # Ensure categorical columns are correctly handled by the encoder
     df_encoded = pd.DataFrame(encoder.transform(df[categorical_cols]), index=df.index)
     df_encoded.columns = encoder.get_feature_names_out(categorical_cols)
@@ -30,7 +29,6 @@ def preprocess_input(data):
     # Drop original categorical columns and concatenate the encoded ones
     df.drop(categorical_cols, axis=1, inplace=True)
     df_final = pd.concat([df, df_encoded], axis=1)
-    
     return df_final
 
 # Flask route to handle prediction

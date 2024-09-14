@@ -32,7 +32,6 @@ class FlaskTestCase(unittest.TestCase):
 
         # Check if response is successful
         self.assertEqual(response.status_code, 200)
-        
         # Check if the prediction output exists
         # self.assertIn(b'price', response.data)
         self.assertIn(b'Predicted Sale Price', response.data)

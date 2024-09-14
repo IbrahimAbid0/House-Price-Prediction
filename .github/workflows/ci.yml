@@ -123,8 +123,8 @@ jobs:
             python -m pytest test.py
           elif [ "${{ matrix.environment }}" = "staging" ]; then
             echo "Deploying to staging environment"
-            vercel --prod --scope=staging --token ${{ secrets.VERCEL_TOKEN }}
+            vercel --prod --scope=staging --token=00112233
           elif [ "${{ matrix.environment }}" = "production" ]; then
             echo "Deploying to production environment"
-            vercel --prod --scope=production --token ${{ secrets.VERCEL_TOKEN }}
+            vercel --prod --scope=production --token=00112233
           fi

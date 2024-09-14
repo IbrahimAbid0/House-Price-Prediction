@@ -12,10 +12,10 @@ import pandas as pd
 app = Flask(__name__)
 
 # Load your trained model and encoder (adjust paths accordingly)
-model = joblib.load('linear_regression_model.pkl')  # Replace with the correct path
+model = joblib.load('linear_regression_model.pkl')
 encoder = joblib.load('onehot_encoder.pkl')  # OneHotEncoder from your notebook
 
-# Preprocessing function to transform input
+
 def preprocess_input(data):
     """Preprocess the input data for prediction."""
     df = pd.DataFrame([data])
@@ -23,13 +23,15 @@ def preprocess_input(data):
     # List of categorical columns used in your notebook
     categorical_cols = ['MSZoning', 'LotConfig', 'BldgType', 'Exterior1st']
     # Ensure categorical columns are correctly handled by the encoder
-    df_encoded = pd.DataFrame(encoder.transform(df[categorical_cols]), index=df.index)
+    temp = encoder.transform(df[categorical_cols])
+    df_encoded = pd.DataFrame(temp, index=df.index)
     df_encoded.columns = encoder.get_feature_names_out(categorical_cols)
 
     # Drop original categorical columns and concatenate the encoded ones
     df.drop(categorical_cols, axis=1, inplace=True)
     df_final = pd.concat([df, df_encoded], axis=1)
     return df_final
+
 
 # Flask route to handle prediction
 @app.route("/", methods=["GET", "POST"])
@@ -63,6 +65,7 @@ def index():
 
     # Render HTML page with prediction
     return render_template('index.html', price=price)
+
 
 # Run the app
 if __name__ == "__main__":
